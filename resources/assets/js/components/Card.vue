@@ -3,7 +3,6 @@
     <p>[{{ entry.contentType }}]</p>
     <p>{{ entry.title }}</p>
     <router-link :to="{ name: 'entry', params: { id: entry.id, type: entry.contentTypeSlug }}">Expand</router-link>
-    <div><a v-on:click="share('text')">Share</a></div>
 </div>
 </template>
 
@@ -12,9 +11,7 @@
         name: 'Card',
         props: ['entry'],
         methods: {
-            share: function() {
-                this.$emit('shareEvent', this.entry)
-            }
+            // no methods
         }
     }
 </script>

@@ -17,8 +17,6 @@
         </div>
     </div>
     
-    <!-- Include Symphony's Client Extension API javascript -->
-    <script type="text/javascript" src="https://symphony.com/resources/api/v1.0/symphony-api.js" charset="utf-8"></script>
     <script src="{{ elixir('js/app.js') }}"></script>
     
   </body>
