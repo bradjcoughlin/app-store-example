@@ -12,9 +12,7 @@
 
     <div id="app">
         <navigation></navigation>
-        <div class="container-fluid">
-            <router-view></router-view>
-        </div>
+        <router-view></router-view>
     </div>
     
     <script src="{{ elixir('js/app.js') }}"></script>

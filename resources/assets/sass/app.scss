@@ -1,18 +1,25 @@
 
-// Fonts
-//@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
-
 // Variables
-//@import "variables";
+@import "variables";
+
+// Bootstrap Variables
+@import "bootstrap-variables";
 
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// Navbar Styles
+@import "navbar";
 
 // Nav Bar
-body { padding-top: 70px; }
+body { padding-top: 55px; }
+
+// Typography
+h1 {
+	font-family: $sym-font-thin;
+}
 
 // Card
 .sym-card {
-	height: 180px;
+	//height: 180px;
 }

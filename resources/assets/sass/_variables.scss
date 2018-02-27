@@ -1,38 +1,40 @@
+// Font stacks
+$sym-font-thin: "Roboto-Thin", Helvetica, Arial, sans-serif;
+$sym-font-light: "Roboto-Light", Helvetica, Arial, sans-serif;
+$sym-font-normal: "Roboto", Helvetica, Arial, sans-serif;
 
-// Body
-$body-bg: #f5f8fa;
+// Colors
+$brandGrey: #555555;
+$brandBlue: #44b3dd;
+$brandGreen: #66bb66;
+$brandYellow: #f7bb00;
+$brandMagenta: #ee5577;
+$brandGreyDark: #333333;
+$brandBlueDark: #00557f;
+$brandGreenDark: #226622;
+$brandYellowDark: #915500;
+$brandMagentaDark: #912244;
+$brandNewBlue: #29B6F6;
 
-// Borders
-$laravel-border-color: darken($body-bg, 10%);
-$list-group-border: $laravel-border-color;
-$navbar-default-border: $laravel-border-color;
-$panel-default-border: $laravel-border-color;
-$panel-inner-border: $laravel-border-color;
+// Hero height at respective breakpoints
+$hero-home-height-xs: 440px;
+$hero-home-height-sm: 480px;
+$hero-home-height-lg: 580px;
+$hero-height-xs: 260px;
+$hero-height-sm: 280px;
+$hero-height-md: 300px;
+$hero-height-lg: 320px;
 
-// Brands
-$brand-primary: #3097D1;
-$brand-info: #8eb4cb;
-$brand-success: #2ab27b;
-$brand-warning: #cbb956;
-$brand-danger: #bf5329;
+// Whitespace
+$sym-whitespace-base: 12px;
+$sym-whitespace-xxs: $sym-whitespace-base;
+$sym-whitespace-xs: ceil(($sym-whitespace-base * 2)); // 24px
+$sym-whitespace-sm: ceil(($sym-whitespace-base * 4)); // 48px
+$sym-whitespace: ceil(($sym-whitespace-base * 5)); // 60px
+$sym-whitespace-md: ceil(($sym-whitespace-base * 8)); // 96px
+$sym-whitespace-lg: ceil(($sym-whitespace-base * 10)); // 120px
 
-// Typography
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
-$font-family-sans-serif: "Raleway", sans-serif;
-$font-size-base: 14px;
-$line-height-base: 1.6;
-$text-color: #636b6f;
-
-// Navbar
-$navbar-default-bg: #fff;
-
-// Buttons
-$btn-default-color: $text-color;
-
-// Inputs
-$input-border: lighten($text-color, 40%);
-$input-border-focus: lighten($brand-primary, 25%);
-$input-color-placeholder: lighten($text-color, 30%);
-
-// Panels
-$panel-default-heading-bg: #fff;
+// Row Widths
+$sym-row-width-sm: 738px;
+$sym-row-width-md: 920px;
+$sym-row-width-lg: 1170px;

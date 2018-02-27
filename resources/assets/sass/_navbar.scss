@@ -1,0 +1,168 @@
+/*================
+      Navbar
+=================*/
+.navbar.navbar-inverse.navbar-fixed-top.sym-navbar-top {
+  background-color: transparent;
+  border-bottom: 0;
+  font-size: 14px;
+  transition: all 0.4s;
+  a.navbar-brand {
+    display: block;
+    background-image: url('/images/symphony-logo-nav.svg');
+    background-position: center right;
+    background-repeat: no-repeat;
+    width: 195px;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-right: 0;
+    background-size: 180px auto;
+  }
+  .navbar-toggle {
+    border-radius: 0;
+    border: none;
+    &:hover, &:active, &:focus {
+      background-color: transparent;
+    }
+  }
+  .navbar-collapse {
+    max-height: 500px !important;
+    border-top: none;
+    .navbar-nav > li > a {
+      color: #fff;
+      background-color: transparent !important;
+      &:hover, &:active, &:focus {
+        color: #fff;
+      }
+    }
+    .dropdown-menu {
+      border: none;
+      border-radius: 0;
+      top: 55px;
+      & > li > a {
+        font-size: 14px;
+      }
+      li.dropdown-header {
+        font-size: 13px;
+      }
+    }
+    @media (max-width: $screen-xs-max) {
+      background-color: #fff;
+    }
+  }
+  #sym-nav-signup {
+    margin-top: 8px;
+    margin-left: 15px;
+    .btn-group .btn {
+      padding-left: 12px;
+      padding-right: 12px;
+      font-size: 14px;
+    }
+  }
+  // these apply only to desktop
+  .navbar-collapse.collapse:not(.in) ul.nav.navbar-nav.navbar-right {
+    // animate in colored border on hover
+    &> li:not(#sym-nav-signup),
+    &> li.dropdown {
+      height: 53px;
+      padding-bottom: 2px;
+      &> a {
+        height: 53px;
+      }
+      &:after {
+        content: '';
+        display: block;
+        margin: auto;
+        height: 2px;
+        width: 0px;
+        background: transparent;
+        transition: width .3s ease, background-color .3s ease;
+      }
+      &:hover:after {
+        width: 100%;
+        background: $brandNewBlue;
+      }
+    }
+  }
+  // these apply only to mobile
+  .navbar-collapse.collapse.in,
+  .navbar-collapse.collapsing {
+    .navbar-nav > li > a,
+    .navbar-nav ul.dropdown-menu > li > a {
+      font-size: $font-size-base;
+      color: $gray-dark;
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+    .navbar-nav > li > a {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .navbar-nav ul.dropdown-menu > li > a {
+      padding-left: 48px;
+      padding-right: 48px;
+    }
+  }
+  ul.navbar-right {
+    margin-right: 0;
+  }
+  &.sym-nav-contrast {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+  &.sym-nav-home {
+    background-color: transparent;
+    .navbar-nav > li > a {
+      color: #fff;
+    }
+  }
+  &.not-at-top {
+    background-color: rgba(51, 51, 51, 0.8);
+  }
+  &.sym-nav-white,
+  &.sym-nav-white-default {
+    background-color: #fff;
+    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.125);
+    a.navbar-brand {
+      background-image: url('/images/symphony-logo-nav-light.svg');
+    }
+    .navbar-toggle {
+      border-radius: 0;
+      border: none;
+      .icon-bar {
+        background-color: $gray-dark;
+      }
+    }
+    .navbar-collapse {
+      .navbar-nav > li > a {
+        color: $gray-dark;
+        &:hover, &:active, &:focus {
+          color: $gray-dark;
+        }
+      }
+    }
+  }
+
+  // Sign up button
+  &.sym-nav-white,
+  &.sym-nav-white-default,
+  .navbar-collapse.in {
+    #sym-nav-signup .btn-group .btn {
+      color: #333;
+      border-color: rgba(51,51,51,0.5);
+      &:hover {
+        border-color: #333;
+      }
+    }
+  }
+
+  // Mobile adjustments
+  @media (max-width: $screen-sm-max) {
+    // @ sm, squeeze the nav together a bit
+    .navbar-collapse.collapse:not(.in) .navbar-nav > li > a {
+      padding-left: 10px;
+      padding-right: 10px
+    }
+    #sym-nav-signup {
+      margin-left: 12px;
+    }
+  }
+}
