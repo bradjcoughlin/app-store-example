@@ -2,12 +2,14 @@
     <div>
         <hero></hero>
         <span v-show="loading">Loading...</span>
-        <div class="container">
-            <div class="row">
-                <card v-for="entry in entries"
-                    :key="entry.id"
-                    v-bind:entry="entry"
-                    v-on:shareEvent="share(entry)"></card>
+        <div class="container-fluid">
+            <div class="container">
+                <div class="row">
+                    <card v-for="entry in entries"
+                        :key="entry.id"
+                        v-bind:entry="entry"
+                        v-on:shareEvent="share(entry)"></card>
+                </div>
             </div>
         </div>
     </div>
@@ -45,5 +47,8 @@
 .container {
     padding-top: 60px;
     padding-bottom: 60px;
+}
+.container-fluid {
+    background-color: #f5f5f5;
 }
 </style>

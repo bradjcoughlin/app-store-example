@@ -3821,6 +3821,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Home',
@@ -4826,7 +4828,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['id', 'type'],
     data: function data() {
         return {
-            loading: false,
+            loading: true,
+            loaded: false,
             entry: ""
         };
     },
@@ -4834,7 +4837,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         // show loading spinner
-        this.loading = true;
         axios({ method: "GET", "url": "/api/entry/" + this.id }).then(function (result) {
             _this.entry = result.data;
             _this.loading = false;
@@ -46887,7 +46889,7 @@ exports = module.exports = __webpack_require__(25)(undefined);
 
 
 // module
-exports.push([module.i, "\n.sym-card[data-v-2e0dd872] {\n    padding: 0;\n}\n.sym-card-inner[data-v-2e0dd872] {\n    height: 100px;\n    margin: 6px;\n    padding: 20px;\n    border: solid 1px #ddd;\n}\nimg[data-v-2e0dd872] {\n    float: left;\n    width: 60px;\n    height: 60px;\n}\n.sym-card-text[data-v-2e0dd872] {\n    margin-left: 80px;\n}\n.sym-type-label[data-v-2e0dd872] {\n    display: inline-block;\n    float: left;\n    background-color: #29B6F6;\n    color: #fff;\n    font-size: 12px;\n    text-transform: uppercase;\n    padding-right: 4px;\n    padding-left: 4px;\n}\n.sym-name[data-v-2e0dd872] {\n    font-size: 18px;\n    display: block;\n    float: left;\n    width: 100%;\n    padding-top: 4px;\n}\n.sym-creator[data-v-2e0dd872] {\n    display: block;\n    float: left;\n    width: 100%;\n    color: #777;\n    font-size: 12px;\n}\n", ""]);
+exports.push([module.i, "\n.sym-card[data-v-2e0dd872] {\n    padding: 0;\n}\n.sym-card-inner[data-v-2e0dd872] {\n    height: 100px;\n    margin: 6px;\n    padding: 20px;\n    border: solid 1px #eee;\n    background-color: #fff;\n}\n.sym-card[data-v-2e0dd872]:hover, .sym-card[data-v-2e0dd872]:focus {\n    cursor: pointer;\n    -webkit-transform: scale(1.0125);\n            transform: scale(1.0125);\n    -webkit-transition: all .5s;\n    transition: all .5s;\n}\n.sym-card:hover .sym-card-inner[data-v-2e0dd872], .sym-card:focus .sym-card-inner[data-v-2e0dd872] {\n    -webkit-transition: all .5s;\n    transition: all .5s;\n    -webkit-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.125);\n            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.125);\n}\nimg[data-v-2e0dd872] {\n    float: left;\n    width: 60px;\n    height: 60px;\n}\n.sym-card-text[data-v-2e0dd872] {\n    margin-left: 80px;\n}\n.sym-type-label[data-v-2e0dd872] {\n    display: inline-block;\n    float: left;\n    background-color: #29B6F6;\n    color: #fff;\n    font-size: 12px;\n    text-transform: uppercase;\n    padding-right: 4px;\n    padding-left: 4px;\n}\n.sym-name[data-v-2e0dd872] {\n    font-size: 18px;\n    display: block;\n    float: left;\n    width: 100%;\n    padding-top: 4px;\n}\n.sym-creator[data-v-2e0dd872] {\n    display: block;\n    float: left;\n    width: 100%;\n    color: #777;\n    font-size: 12px;\n}\n", ""]);
 
 // exports
 
@@ -46972,7 +46974,7 @@ exports = module.exports = __webpack_require__(25)(undefined);
 
 
 // module
-exports.push([module.i, "\n.container[data-v-6707e3d4] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6707e3d4] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n.container-fluid[data-v-6707e3d4] {\n    background-color: #f5f5f5;\n}\n", ""]);
 
 // exports
 
@@ -47005,22 +47007,24 @@ var render = function() {
         [_vm._v("Loading...")]
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "row" },
-          _vm._l(_vm.entries, function(entry) {
-            return _c("card", {
-              key: entry.id,
-              attrs: { entry: entry },
-              on: {
-                shareEvent: function($event) {
-                  _vm.share(entry)
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "container" }, [
+          _c(
+            "div",
+            { staticClass: "row" },
+            _vm._l(_vm.entries, function(entry) {
+              return _c("card", {
+                key: entry.id,
+                attrs: { entry: entry },
+                on: {
+                  shareEvent: function($event) {
+                    _vm.share(entry)
+                  }
                 }
-              }
+              })
             })
-          })
-        )
+          )
+        ])
       ])
     ],
     1

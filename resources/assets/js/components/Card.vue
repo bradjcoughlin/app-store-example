@@ -34,7 +34,17 @@
     height: 100px;
     margin: 6px;
     padding: 20px;
-    border: solid 1px #ddd;
+    border: solid 1px #eee;
+    background-color: #fff;
+}
+.sym-card:hover, .sym-card:focus {
+    cursor: pointer;
+    transform: scale(1.0125);
+    transition: all .5s;
+}
+.sym-card:hover .sym-card-inner, .sym-card:focus .sym-card-inner {
+    transition: all .5s;
+    box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.125);
 }
 img {
     float: left;
