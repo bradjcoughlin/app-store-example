@@ -13,8 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'News App 2'),
-    'id' => env('APP_ID','newsapp2'),
+    'name' => env('APP_NAME', 'Bot Catalog'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +53,6 @@ return [
     */
 
     'url' => env('APP_URL', 'https://newsapp.app'),
-    'domain' => env('APP_DOMAIN', 'newsapp.app'),
 
     /*
     |--------------------------------------------------------------------------

@@ -14,7 +14,8 @@
             <div class="container-fluid sym-screenshots">
                 <img v-for="screenshot in entry.screenshots" :src="screenshot">
             </div>
-            <div class="container sym-video">
+
+            <div v-if="entry.video" class="container sym-video">
                 <div class="sym-app-video-row sym-sm-display-table">
                     <div class="col-sm-4 sym-sm-display-table-cell">
                         <h4>Video Title</h4>
@@ -29,6 +30,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
 </template>
