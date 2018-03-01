@@ -21,5 +21,7 @@
         "vue": "^2.5.13",
         "vue-router": "^3.0.1"
     },
-    "dependencies": {}
+    "dependencies": {
+        "spinkit": "^1.2.5"
+    }
 }

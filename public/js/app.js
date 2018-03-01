@@ -484,6 +484,88 @@ module.exports = function normalizeComponent (
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+/*
+	MIT License http://www.opensource.org/licenses/mit-license.php
+	Author Tobias Koppers @sokra
+*/
+// css base code, injected by the css-loader
+module.exports = function(useSourceMap) {
+	var list = [];
+
+	// return the list of modules as css string
+	list.toString = function toString() {
+		return this.map(function (item) {
+			var content = cssWithMappingToString(item, useSourceMap);
+			if(item[2]) {
+				return "@media " + item[2] + "{" + content + "}";
+			} else {
+				return content;
+			}
+		}).join("");
+	};
+
+	// import a list of modules into the list
+	list.i = function(modules, mediaQuery) {
+		if(typeof modules === "string")
+			modules = [[null, modules, ""]];
+		var alreadyImportedModules = {};
+		for(var i = 0; i < this.length; i++) {
+			var id = this[i][0];
+			if(typeof id === "number")
+				alreadyImportedModules[id] = true;
+		}
+		for(i = 0; i < modules.length; i++) {
+			var item = modules[i];
+			// skip already imported module
+			// this implementation is not 100% perfect for weird media query combinations
+			//  when a module is imported multiple times with different media queries.
+			//  I hope this will never occur (Hey this way we have smaller bundles)
+			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
+				if(mediaQuery && !item[2]) {
+					item[2] = mediaQuery;
+				} else if(mediaQuery) {
+					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
+				}
+				list.push(item);
+			}
+		}
+	};
+	return list;
+};
+
+function cssWithMappingToString(item, useSourceMap) {
+	var content = item[1] || '';
+	var cssMapping = item[3];
+	if (!cssMapping) {
+		return content;
+	}
+
+	if (useSourceMap && typeof btoa === 'function') {
+		var sourceMapping = toComment(cssMapping);
+		var sourceURLs = cssMapping.sources.map(function (source) {
+			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
+		});
+
+		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
+	}
+
+	return [content].join('\n');
+}
+
+// Adapted from convert-source-map (MIT)
+function toComment(sourceMap) {
+	// eslint-disable-next-line no-undef
+	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
+	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
+
+	return '/*# ' + data + ' */';
+}
+
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -707,88 +789,6 @@ function applyToTag (styleElement, obj) {
     }
     styleElement.appendChild(document.createTextNode(css))
   }
-}
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-/*
-	MIT License http://www.opensource.org/licenses/mit-license.php
-	Author Tobias Koppers @sokra
-*/
-// css base code, injected by the css-loader
-module.exports = function(useSourceMap) {
-	var list = [];
-
-	// return the list of modules as css string
-	list.toString = function toString() {
-		return this.map(function (item) {
-			var content = cssWithMappingToString(item, useSourceMap);
-			if(item[2]) {
-				return "@media " + item[2] + "{" + content + "}";
-			} else {
-				return content;
-			}
-		}).join("");
-	};
-
-	// import a list of modules into the list
-	list.i = function(modules, mediaQuery) {
-		if(typeof modules === "string")
-			modules = [[null, modules, ""]];
-		var alreadyImportedModules = {};
-		for(var i = 0; i < this.length; i++) {
-			var id = this[i][0];
-			if(typeof id === "number")
-				alreadyImportedModules[id] = true;
-		}
-		for(i = 0; i < modules.length; i++) {
-			var item = modules[i];
-			// skip already imported module
-			// this implementation is not 100% perfect for weird media query combinations
-			//  when a module is imported multiple times with different media queries.
-			//  I hope this will never occur (Hey this way we have smaller bundles)
-			if(typeof item[0] !== "number" || !alreadyImportedModules[item[0]]) {
-				if(mediaQuery && !item[2]) {
-					item[2] = mediaQuery;
-				} else if(mediaQuery) {
-					item[2] = "(" + item[2] + ") and (" + mediaQuery + ")";
-				}
-				list.push(item);
-			}
-		}
-	};
-	return list;
-};
-
-function cssWithMappingToString(item, useSourceMap) {
-	var content = item[1] || '';
-	var cssMapping = item[3];
-	if (!cssMapping) {
-		return content;
-	}
-
-	if (useSourceMap && typeof btoa === 'function') {
-		var sourceMapping = toComment(cssMapping);
-		var sourceURLs = cssMapping.sources.map(function (source) {
-			return '/*# sourceURL=' + cssMapping.sourceRoot + source + ' */'
-		});
-
-		return [content].concat(sourceURLs).concat([sourceMapping]).join('\n');
-	}
-
-	return [content].join('\n');
-}
-
-// Adapted from convert-source-map (MIT)
-function toComment(sourceMap) {
-	// eslint-disable-next-line no-undef
-	var base64 = btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap))));
-	var data = 'sourceMappingURL=data:application/json;charset=utf-8;base64,' + base64;
-
-	return '/*# ' + data + ' */';
 }
 
 
@@ -4124,7 +4124,7 @@ var content = __webpack_require__(17);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("447a94f8", content, false, {});
+var update = __webpack_require__(3)("447a94f8", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -4143,12 +4143,12 @@ if(false) {
 /* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.container[data-v-6707e3d4] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n.container-fluid[data-v-6707e3d4] {\n    background-color: #f5f5f5;\n}\n", ""]);
+exports.push([module.i, "\n.container[data-v-6707e3d4] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n.container-fluid[data-v-6707e3d4] {\n    background-color: #f5f5f5;\n}\n.sym-loading[data-v-6707e3d4] {\n    padding-top: 220px;\n    padding-bottom: 100px;\n    background-color: #f5f5f5;\n}\n", ""]);
 
 // exports
 
@@ -4209,14 +4209,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'Home',
     data: function data() {
         return {
             loading: false,
-            entries: "",
-            appId: "newsapp2"
+            entries: ""
         };
     },
     mounted: function mounted() {
@@ -4251,7 +4256,7 @@ var render = function() {
       _c("hero"),
       _vm._v(" "),
       _c(
-        "span",
+        "div",
         {
           directives: [
             {
@@ -4260,9 +4265,10 @@ var render = function() {
               value: _vm.loading,
               expression: "loading"
             }
-          ]
+          ],
+          staticClass: "sym-loading"
         },
-        [_vm._v("Loading...")]
+        [_vm._m(0)]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "container-fluid" }, [
@@ -4288,7 +4294,20 @@ var render = function() {
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sk-three-bounce" }, [
+      _c("div", { staticClass: "sk-child sk-bounce1" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sk-child sk-bounce2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sk-child sk-bounce3" })
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -4774,7 +4793,7 @@ var content = __webpack_require__(26);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("285a6093", content, false, {});
+var update = __webpack_require__(3)("285a6093", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -4793,7 +4812,7 @@ if(false) {
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -4928,7 +4947,7 @@ var content = __webpack_require__(31);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("0b845856", content, false, {});
+var update = __webpack_require__(3)("0b845856", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -4947,7 +4966,7 @@ if(false) {
 /* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
@@ -5097,7 +5116,7 @@ var content = __webpack_require__(36);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("2d9e5578", content, false, {});
+var update = __webpack_require__(3)("2d9e5578", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -5116,12 +5135,12 @@ if(false) {
 /* 36 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 
 // module
-exports.push([module.i, "\n.sym-top-section[data-v-0f6f1dc0] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\nimg.sym-icon[data-v-0f6f1dc0] {\n    float: left;\n    width: 180px;\n    max-width: 100%;\n}\n.sym-name-desc[data-v-0f6f1dc0] {\n    margin-left: 200px;\n}\n.sym-screenshots[data-v-0f6f1dc0] {\n    background-color: #f5f5f5;\n    padding-top: 42px;\n    padding-bottom: 42px;\n}\n.sym-screenshots img[data-v-0f6f1dc0] {\n    width: 48%;\n    -webkit-box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);\n            box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);\n    margin: auto 1% 20px 1%;\n}\n.sym-video[data-v-0f6f1dc0] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n", ""]);
+exports.push([module.i, "\n.sym-top-section[data-v-0f6f1dc0] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\nimg.sym-icon[data-v-0f6f1dc0] {\n    float: left;\n    width: 180px;\n    max-width: 100%;\n}\n.sym-name-desc[data-v-0f6f1dc0] {\n    margin-left: 200px;\n}\n.sym-screenshots[data-v-0f6f1dc0] {\n    background-color: #f5f5f5;\n    padding-top: 42px;\n    padding-bottom: 42px;\n}\n.sym-screenshots img[data-v-0f6f1dc0] {\n    width: 48%;\n    -webkit-box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);\n            box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);\n    margin: auto 1% 20px 1%;\n}\n.sym-video[data-v-0f6f1dc0] {\n    padding-top: 60px;\n    padding-bottom: 60px;\n}\n.sym-loading[data-v-0f6f1dc0] {\n    padding-top: 220px;\n    padding-bottom: 220px;\n    background-color: #f5f5f5;\n}\n", ""]);
 
 // exports
 
@@ -5132,6 +5151,15 @@ exports.push([module.i, "\n.sym-top-section[data-v-0f6f1dc0] {\n    padding-top:
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5213,7 +5241,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c(
-      "span",
+      "div",
       {
         directives: [
           {
@@ -5222,9 +5250,10 @@ var render = function() {
             value: _vm.loading,
             expression: "loading"
           }
-        ]
+        ],
+        staticClass: "sym-loading"
       },
-      [_vm._v("Loading...")]
+      [_vm._m(0)]
     ),
     _vm._v(" "),
     _c(
@@ -5249,16 +5278,21 @@ var render = function() {
           _c("div", { staticClass: "sym-name-desc" }, [
             _c("h1", [_vm._v(_vm._s(_vm.entry.name))]),
             _vm._v(" "),
-            _c("p", [
-              _vm._v("by "),
-              _c(
-                "a",
-                {
-                  attrs: { href: _vm.entry.creatorWebsiteUrl, target: "_blank" }
-                },
-                [_vm._v(_vm._s(_vm.entry.creator))]
-              )
-            ]),
+            _vm.entry.creatorWebsiteUrl
+              ? _c("p", [
+                  _vm._v("by "),
+                  _c(
+                    "a",
+                    {
+                      attrs: {
+                        href: _vm.entry.creatorWebsiteUrl,
+                        target: "_blank"
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.entry.creator))]
+                  )
+                ])
+              : _c("p", [_vm._v("by " + _vm._s(_vm.entry.creator))]),
             _vm._v(" "),
             _c("div", {
               domProps: { innerHTML: _vm._s(_vm.entry.description) }
@@ -5280,7 +5314,7 @@ var render = function() {
                 "div",
                 { staticClass: "sym-app-video-row sym-sm-display-table" },
                 [
-                  _vm._m(0),
+                  _vm._m(1),
                   _vm._v(" "),
                   _c(
                     "div",
@@ -5328,6 +5362,18 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "sk-three-bounce" }, [
+      _c("div", { staticClass: "sk-child sk-bounce1" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sk-child sk-bounce2" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "sk-child sk-bounce3" })
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -5410,7 +5456,7 @@ var content = __webpack_require__(41);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(2)("f66f957e", content, false, {});
+var update = __webpack_require__(3)("f66f957e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
@@ -5429,7 +5475,7 @@ if(false) {
 /* 41 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(3)(false);
+exports = module.exports = __webpack_require__(2)(false);
 // imports
 
 

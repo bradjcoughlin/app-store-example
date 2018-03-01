@@ -8,6 +8,11 @@
 // Bootstrap
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// SpinKit
+$spinkit-spinner-margin: 0 auto;
+$spinkit-spinner-color: #555;
+@import "~spinkit/scss/spinners/7-three-bounce";
+
 // Navbar Styles
 @import "navbar";
 
@@ -17,9 +22,4 @@ body { padding-top: 55px; }
 // Typography
 h1 {
 	font-family: $sym-font-thin;
-}
-
-// Card
-.sym-card {
-	//height: 180px;
 }

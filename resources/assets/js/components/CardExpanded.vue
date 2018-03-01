@@ -1,16 +1,25 @@
 
 <template>
     <div>
-        <span v-show="loading">Loading...</span>
+        <div class="sym-loading" v-show="loading">
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+              </div>
+        </div>
         <div v-show="loaded">
+
             <div class="container sym-top-section">
                 <img class="sym-icon" :src="entry.iconUrl">
                 <div class="sym-name-desc">
                     <h1>{{ entry.name }}</h1>
-                    <p>by <a v-bind:href="entry.creatorWebsiteUrl" target="_blank">{{ entry.creator }}</a></p>
+                    <p v-if="entry.creatorWebsiteUrl">by <a v-bind:href="entry.creatorWebsiteUrl" target="_blank">{{ entry.creator }}</a></p>
+                    <p v-else>by {{ entry.creator }}</p>
                     <div v-html="entry.description"></div>
                 </div>
             </div>
+
             <div class="container-fluid sym-screenshots">
                 <img v-for="screenshot in entry.screenshots" :src="screenshot">
             </div>
@@ -30,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </template>
@@ -70,30 +79,35 @@
 </script>
 
 <style scoped>
-    .sym-top-section {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
-    img.sym-icon {
-        float: left;
-        width: 180px;
-        max-width: 100%;
-    }
-    .sym-name-desc {
-        margin-left: 200px;
-    }
-    .sym-screenshots {
-        background-color: #f5f5f5;
-        padding-top: 42px;
-        padding-bottom: 42px;
-    }
-    .sym-screenshots img {
-        width: 48%;
-        box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);
-        margin: auto 1% 20px 1%;
-    }
-    .sym-video {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
+.sym-top-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+img.sym-icon {
+    float: left;
+    width: 180px;
+    max-width: 100%;
+}
+.sym-name-desc {
+    margin-left: 200px;
+}
+.sym-screenshots {
+    background-color: #f5f5f5;
+    padding-top: 42px;
+    padding-bottom: 42px;
+}
+.sym-screenshots img {
+    width: 48%;
+    box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);
+    margin: auto 1% 20px 1%;
+}
+.sym-video {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.sym-loading {
+    padding-top: 220px;
+    padding-bottom: 220px;
+    background-color: #f5f5f5;
+}
 </style>

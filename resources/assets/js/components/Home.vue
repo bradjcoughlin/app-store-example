@@ -1,7 +1,13 @@
 <template>
     <div>
         <hero></hero>
-        <span v-show="loading">Loading...</span>
+        <div class="sym-loading" v-show="loading">
+            <div class="sk-three-bounce">
+                <div class="sk-child sk-bounce1"></div>
+                <div class="sk-child sk-bounce2"></div>
+                <div class="sk-child sk-bounce3"></div>
+              </div>
+        </div>
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -22,7 +28,6 @@
             return {
                 loading: false,
                 entries: "",
-                appId: "newsapp2"
             }
         },
         mounted() {
@@ -49,6 +54,11 @@
     padding-bottom: 60px;
 }
 .container-fluid {
+    background-color: #f5f5f5;
+}
+.sym-loading {
+    padding-top: 220px;
+    padding-bottom: 100px;
     background-color: #f5f5f5;
 }
 </style>
