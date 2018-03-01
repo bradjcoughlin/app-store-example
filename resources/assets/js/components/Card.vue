@@ -1,7 +1,7 @@
 
 
 <template>
-<div class="sym-card col-sm-4" v-on:click="expand(entry.id, entry.typeSlug)">
+<div class="sym-card col-sm-6 col-lg-4" v-on:click="expand(entry.id, entry.typeSlug)">
     <div class="sym-card-inner">
         <img :src="entry.iconUrl">
         <div class="sym-card-text">

@@ -9,6 +9,13 @@
               </div>
         </div>
         <div v-show="loaded">
+            
+            <div class="container sym-breadcrumb">
+                <ol class="breadcrumb">
+                    <li><router-link to="/">Applications</router-link></li>
+                    <li class="active">{{ entry.name }}</li>
+                </ol>
+            </div>
 
             <div class="container sym-top-section">
                 <img class="sym-icon" :src="entry.iconUrl">
@@ -21,7 +28,9 @@
             </div>
 
             <div class="container-fluid sym-screenshots">
-                <img v-for="screenshot in entry.screenshots" :src="screenshot">
+                <div id="sym-screenshots-inner">
+                    <img v-for="screenshot in entry.screenshots" :src="screenshot">
+                </div>
             </div>
 
             <div v-if="entry.video" class="container sym-video">
@@ -55,8 +64,7 @@
                 entry: ""
             }
         },
-        mounted() {
-            // show loading spinner
+        created() {
             axios({ method: "GET", "url": "/api/entry/" + this.id }).then(result => {
                 this.entry = result.data;
                 this.loading = false;
@@ -66,21 +74,47 @@
             });
         },
         updated() {
-            //this.resizeScreenshotDiv();
+            this.imageLoadStatus();
         },
         methods: {
-            /*resizeScreenshotDiv: function() {
+            imageLoadStatus: function() {
+                let _this = this;
 
                 // resize screenshot container according to image widths
-
-            }*/
+                var images = document.querySelectorAll('.sym-screenshots img');
+                var imageCount = images.length;
+                var imagesLoaded = 0;
+                for(var i = 0; i < imageCount; i++){
+                    images[i].onload = function(){
+                        imagesLoaded++;
+                        if(imagesLoaded == imageCount){
+                            _this.resizeScreenshotDiv(images);
+                        }
+                    }
+                }
+            },
+            resizeScreenshotDiv: function(nodeList) {
+                var totalWidth = 0;
+                for (var i = 0; i < nodeList.length; i++) {
+                    totalWidth += nodeList[i].width;
+                }
+                // add 32px margin
+                totalWidth += nodeList.length * 32;
+                document.getElementById('sym-screenshots-inner').style.width = totalWidth + "px";
+            }
         }
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.sym-breadcrumb {
+    margin-top: 30px;
+}
+ol.breadcrumb {
+    background: transparent;
+}
 .sym-top-section {
-    padding-top: 60px;
+    padding-top: 30px;
     padding-bottom: 60px;
 }
 img.sym-icon {
@@ -95,11 +129,24 @@ img.sym-icon {
     background-color: #f5f5f5;
     padding-top: 42px;
     padding-bottom: 42px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-height: 440px + 84px;
+}
+#sym-screenshots-inner {
+    margin: 0 auto;
+}
+#sym-screenshots-inner::after {
+    display: block;
+    content: "";
+    clear: both;
 }
 .sym-screenshots img {
-    width: 48%;
+    display: inline-block;
+    height: 440px;
     box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);
-    margin: auto 1% 20px 1%;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 .sym-video {
     padding-top: 60px;

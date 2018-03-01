@@ -22,7 +22,26 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  routes // short for `routes: routes`
+  routes, // short for `routes: routes`
+  scrollBehavior (to, from, savedPosition) {
+
+    console.log(savedPosition);
+
+    // handle anchor behavior
+    if (to.hash) {
+      return {
+        selector: to.hash
+        // , offset: { x: 0, y: 10 }
+      }
+    }
+
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+
+  }
 })
 
 const app = new Vue({

@@ -2,15 +2,16 @@
     <div>
 
         <hero></hero>
-
+        
         <div class="sym-loading" v-show="loading">
             <div class="sk-three-bounce">
                 <div class="sk-child sk-bounce1"></div>
                 <div class="sk-child sk-bounce2"></div>
                 <div class="sk-child sk-bounce3"></div>
-              </div>
+            </div>
         </div>
-
+        
+        
         <div class="container-fluid">
             <div class="container">
                 <div class="row">
@@ -19,6 +20,7 @@
                         :key="entry.id"
                         v-bind:entry="entry"
                         v-on:shareEvent="share(entry)"></card>
+
                 </div>
             </div>
         </div>
@@ -105,17 +107,16 @@
         name: 'Home',
         data () {
             return {
-                loading: false,
+                loading: true,
+                loaded: false,
                 entries: "",
             }
         },
-        mounted() {
-
-            // show loading spinner
-            this.loading = true;
+        created() {
             axios({ method: "GET", "url": "/api/entries" }).then(result => {
                 this.entries = result.data;
                 this.loading = false;
+                this.loaded = true;
             }, error => {
                 console.error(error);
             });
@@ -144,7 +145,7 @@
 }
 .sym-loading {
     padding-top: 220px;
-    padding-bottom: 100px;
+    padding-bottom: 220px;
     background-color: #f5f5f5;
 }
 .sym-partner-logos {
