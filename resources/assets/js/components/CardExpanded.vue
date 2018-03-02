@@ -79,9 +79,11 @@
                 console.error(error);
             });
         },
+        mounted() {
+            (document.documentElement||document.body).scrollTop = 0
+        },
         updated() {
             this.imageLoadStatus();
-            (document.documentElement||document.body).scrollTop = 0
         },
         methods: {
             imageLoadStatus: function() {
