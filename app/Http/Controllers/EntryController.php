@@ -71,6 +71,8 @@ class EntryController extends Controller
 			$modelEntry->screenshots = $entry->getScreenshots();
 		}
 		$modelEntry->video = $entry->getVideo();
+		$modelEntry->videoTitle = $entry->getVideoTitle();
+		$modelEntry->videoDescription = $entry->getVideoDescription();
 
 
 		return response()->json($modelEntry);

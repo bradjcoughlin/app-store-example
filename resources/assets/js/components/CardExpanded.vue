@@ -38,11 +38,11 @@
                 </div>
             </div>
 
-            <div v-if="entry.video" class="container sym-video">
+            <div v-show="entry.video" class="container sym-video">
                 <div class="sym-app-video-row sym-sm-display-table">
                     <div class="col-sm-4 sym-sm-display-table-cell">
-                        <h4>Video Title</h4>
-                        <p>Video description of a few lines.</p>
+                        <h3>{{ entry.videoTitle }}</h3>
+                        <p>{{ entry.videoDescription }}</p>
                     </div>
                     <div class="col-sm-8 sym-sm-display-table-cell">
                         <div class="embed-responsive embed-responsive-16by9">
@@ -165,6 +165,9 @@ img.sym-icon {
 .sym-video {
     padding-top: 60px;
     padding-bottom: 60px;
+    h3 {
+        margin-top: 120px;
+    }
 }
 .sym-loading {
     padding-top: 220px;
