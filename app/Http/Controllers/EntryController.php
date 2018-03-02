@@ -67,7 +67,9 @@ class EntryController extends Controller
 		$modelEntry->creator = $entry->getCreator();
 		$modelEntry->creatorWebsiteUrl = $entry->getCreatorWebsiteUrl();
 		$modelEntry->description = Markdown::convertToHtml( $entry->getDescription() );
-		$modelEntry->screenshots = $entry->getScreenshots();
+		if ($entry->getScreenshots()) {
+			$modelEntry->screenshots = $entry->getScreenshots();
+		}
 		$modelEntry->video = $entry->getVideo();
 
 

@@ -6,7 +6,7 @@
                 <div class="sk-child sk-bounce1"></div>
                 <div class="sk-child sk-bounce2"></div>
                 <div class="sk-child sk-bounce3"></div>
-              </div>
+            </div>
         </div>
         <div v-show="loaded">
             
@@ -27,9 +27,14 @@
                 </div>
             </div>
 
-            <div class="container-fluid sym-screenshots">
+            <div class="container-fluid sym-screenshots" v-show="entry.screenshots">
                 <div id="sym-screenshots-inner">
-                    <img v-for="screenshot in entry.screenshots" :src="screenshot">
+                    <div class="sk-three-bounce" v-show="imagesLoading">
+                        <div class="sk-child sk-bounce1"></div>
+                        <div class="sk-child sk-bounce2"></div>
+                        <div class="sk-child sk-bounce3"></div>
+                    </div>
+                    <img v-for="screenshot in entry.screenshots" :src="screenshot" class="sym-screenshot">
                 </div>
             </div>
 
@@ -61,6 +66,7 @@
             return {
                 loading: true,
                 loaded: false,
+                imagesLoading: true,
                 entry: ""
             }
         },
@@ -75,6 +81,7 @@
         },
         updated() {
             this.imageLoadStatus();
+            (document.documentElement||document.body).scrollTop = 0
         },
         methods: {
             imageLoadStatus: function() {
@@ -89,6 +96,7 @@
                         imagesLoaded++;
                         if(imagesLoaded == imageCount){
                             _this.resizeScreenshotDiv(images);
+                            _this.imagesLoading = false;
                         }
                     }
                 }
@@ -100,7 +108,8 @@
                 }
                 // add 32px margin
                 totalWidth += nodeList.length * 32;
-                document.getElementById('sym-screenshots-inner').style.width = totalWidth + "px";
+                $('#sym-screenshots-inner').width(totalWidth);
+                $('.sym-screenshot').animate({opacity: 1}, 500)
             }
         }
     }
@@ -147,6 +156,7 @@ img.sym-icon {
     box-shadow: 2px 2px 10px 0 rgba(0,0,0,.1);
     margin-left: 16px;
     margin-right: 16px;
+    opacity: 0;
 }
 .sym-video {
     padding-top: 60px;
@@ -155,6 +165,11 @@ img.sym-icon {
 .sym-loading {
     padding-top: 220px;
     padding-bottom: 220px;
+    background-color: #f5f5f5;
+}
+.sk-three-bounce {
+    padding-top: 200px;
+    padding-bottom: 200px;
     background-color: #f5f5f5;
 }
 </style>
