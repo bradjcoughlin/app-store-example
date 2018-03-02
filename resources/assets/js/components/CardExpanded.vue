@@ -54,6 +54,12 @@
                 </div>
             </div>
 
+            <div v-show="entry.helpInformation" class="container sym-help-info">
+                <div class="row">
+                    <div v-html="entry.helpInformation" class="col-sm-8 col-sm-offset-2"></div>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -178,5 +184,23 @@ img.sym-icon {
     padding-top: 200px;
     padding-bottom: 200px;
     background-color: #f5f5f5;
+}
+</style>
+
+<style lang="scss">
+.sym-help-info {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    h3 {
+        margin-bottom: 30px;
+    }
+    img {
+        display: block;
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
 }
 </style>

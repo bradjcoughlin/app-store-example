@@ -73,6 +73,7 @@ class EntryController extends Controller
 		$modelEntry->video = $entry->getVideo();
 		$modelEntry->videoTitle = $entry->getVideoTitle();
 		$modelEntry->videoDescription = $entry->getVideoDescription();
+		$modelEntry->helpInformation = Markdown::convertToHtml( $entry->getHelpInformation() );
 
 
 		return response()->json($modelEntry);
