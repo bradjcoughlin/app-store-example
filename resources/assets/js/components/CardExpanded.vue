@@ -110,6 +110,8 @@
                 }
                 // add 32px margin
                 totalWidth += nodeList.length * 32;
+                // gutter to right
+                totalWidth += 16;
                 $('#sym-screenshots-inner').width(totalWidth);
                 $('.sym-screenshot').animate({opacity: 1}, 500)
             }
