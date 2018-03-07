@@ -16,6 +16,7 @@
             <div class="container sym-apps" v-show="loaded">
                 <div class="row">
                     <h3>Apps, Bots, &amp; Integrations</h3>
+                    <p>Facilitate, enable, and simplify daily workflows on Symphony using bots, integrations, and partner applications. Take a look at these innovations made available via Symphony’s end-to-end encrypted infrastructure and open APIs.</p>
                     <card v-for="entry in entries"
                         :key="entry.id"
                         v-bind:entry="entry"></card>
@@ -92,5 +93,10 @@
     bottom: 0;
     left: 0;
     padding: 200px;
+}
+p {
+    text-align: center;
+    max-width: 960px;
+    margin: 0 auto 12px auto;
 }
 </style>

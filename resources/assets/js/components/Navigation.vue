@@ -25,7 +25,7 @@
           <ul class="dropdown-menu">
             <li><a href="#">Messaging and Productivity</a></li>
             <li><a href="#">Security and Compliance</a></li>
-            <li><a href="#">Symphony Market</a></li>
+            <li><a href="#">App Directory</a></li>
             <li><a href="#">Download</a></li>
             <li><a href="#">Pricing</a></li>
           </ul>

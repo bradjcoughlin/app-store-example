@@ -12,7 +12,7 @@
             
             <div class="container sym-breadcrumb">
                 <ol class="breadcrumb">
-                    <li><router-link to="/">Applications</router-link></li>
+                    <li><router-link to="/">App Directory</router-link></li>
                     <li class="active">{{ entry.name }}</li>
                 </ol>
             </div>

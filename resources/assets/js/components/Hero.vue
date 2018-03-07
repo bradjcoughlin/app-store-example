@@ -4,7 +4,8 @@
     <div class="container">
       <div class="sym-display-table">
         <div class="sym-display-table-cell">
-          <h1>Symphony Market</h1>
+          <h1>App Directory</h1>
+          <h5>Apps, bots, integrations, and partners</h5>
         </div>
       </div>
     </div>
@@ -24,10 +25,13 @@
 <style scoped>
 .container-fluid {
   color: #fff;
-  background-color: #25354A;
+  background-color: #213f67;
+  background-image: url('/images/fractals_2560.jpg');
+  background-position: center;
+  background-size: cover;
 }
 .container {
-  height: 180px;
+  height: 220px;
   position: relative;
 }
 .sym-display-table {
@@ -39,8 +43,13 @@
   display: table-cell;
   float: none;
   vertical-align: bottom;
+  padding-bottom: 20px;
 }
 h1 {
+  font-weight: 100;
+}
+h5 {
+  text-transform: uppercase;
   font-weight: 100;
 }
 </style>
