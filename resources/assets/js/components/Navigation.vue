@@ -11,7 +11,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      <a class="navbar-brand sym-scroll" href="/"></a>
+      <a class="navbar-brand sym-scroll" href="https://symphony.com"></a>
       <img src="/images/symphony-logo-nav-light.svg" style="display: none;">
 
     </div>
