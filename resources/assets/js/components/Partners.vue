@@ -51,7 +51,7 @@
             <a href="https://www.smartkarma.com/home/" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/smartkarma.png"></a>
         </div>
         <div class="col-sm-4">
-            <a href="https://glue42.com/symphony-software-foundation/" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/tick42.png"></a>
+            <a href="https://glue42.com" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/tick42.png"></a>
         </div>
     </div>
 </div>
