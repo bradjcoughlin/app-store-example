@@ -9,7 +9,7 @@
             <a href="http://www.arcontech.com" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/arcontech.png"></a>
         </div>
         <div class="col-sm-4">
-            <a href="http://www.bluepool.tech" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/blue-pool-limited.png"></a>
+            <a href="http://www.bluefireai.com/" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="/images/blue-fire-ai.png"></a>
         </div>
         <div class="col-sm-4">
             <a href="https://www.factset.com/analytics/collaboration-and-messaging" target="_blank" rel="nofollow noopener noreferrer"><img class="img-responsive" src="https://symphony.com/images/partners/factset.png"></a>
