@@ -29,6 +29,14 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  if (to.params.title) {
+    //document.title = to.params.title
+  }
+  console.log(to)
+  next()
+})
+
 const app = new Vue({
   router
 }).$mount('#app')

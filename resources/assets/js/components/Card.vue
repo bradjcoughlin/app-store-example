@@ -1,7 +1,7 @@
 
 
 <template>
-<div class="sym-card col-sm-6 col-lg-4" v-on:click="expand(entry.id, entry.typeSlug)">
+<div class="sym-card col-sm-6 col-lg-4" v-on:click="expand(entry.id, entry.typeSlug, entry.name)">
     <div class="sym-card-inner">
         <img :src="entry.iconUrl">
         <div class="sym-card-text">
@@ -19,8 +19,8 @@
         name: 'Card',
         props: ['entry'],
         methods: {
-            expand: function(id, slug) {
-                this.$router.push({ name: 'item', params: { id: id, type: slug }})
+            expand: function(id, slug, name) {
+                this.$router.push({ name: 'item', params: { id: id, type: slug, title: name }})
             }
         }
     }

@@ -89,6 +89,7 @@
             (document.documentElement||document.body).scrollTop = 0
         },
         updated() {
+            document.title = this.entry.name + ' | Symphony';
             this.imageLoadStatus();
         },
         methods: {

@@ -88,6 +88,9 @@
                 }
             }
         },
+        mounted() {
+            document.title = 'App Directory | Symphony';
+        },
         created() {
             axios.get('/api/entries')
                 .then(response => {
