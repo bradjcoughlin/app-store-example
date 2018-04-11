@@ -1,3 +1,5 @@
+import 'babel-polyfill'
+
 import VueRouter from 'vue-router'
 import Home from './components/Home.vue'
 import Navigation from './components/Navigation.vue'
