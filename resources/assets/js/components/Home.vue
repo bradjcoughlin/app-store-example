@@ -90,6 +90,7 @@
         },
         mounted() {
             document.title = 'App Directory | Symphony';
+            analytics.page();
         },
         created() {
             axios.get('/api/entries')

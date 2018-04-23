@@ -72,6 +72,7 @@
             return {
                 loading: true,
                 loaded: false,
+                pageCall: false,
                 imagesLoading: true,
                 entry: ""
             }
@@ -86,11 +87,21 @@
             });
         },
         mounted() {
-            (document.documentElement||document.body).scrollTop = 0
+            (document.documentElement||document.body).scrollTop = 0;
         },
         updated() {
+            // set document title
             document.title = this.entry.name + ' | Symphony';
+            // check if images are loaded
             this.imageLoadStatus();
+            // send page event (but only once)
+            if (this.entry.name && !this.pageCall) {
+                analytics.page(this.entry.name, {
+                  title: this.entry.name + ' | Symphony',
+                  path: '/#/extension-app/' + this.id,
+                });
+                this.pageCall = true;
+            }
         },
         methods: {
             imageLoadStatus: function() {
