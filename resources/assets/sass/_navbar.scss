@@ -8,7 +8,7 @@
   transition: all 0.4s;
   a.navbar-brand {
     display: block;
-    background-image: url('/images/symphony-logo-nav.svg');
+    background-image: url('/images/symphony-logo-nav.svg?v=2');
     background-position: center right;
     background-repeat: no-repeat;
     width: 195px;
@@ -122,7 +122,7 @@
     background-color: #fff;
     box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.125);
     a.navbar-brand {
-      background-image: url('/images/symphony-logo-nav-light.svg');
+      background-image: url('/images/symphony-logo-nav.svg?v=2');
     }
     .navbar-toggle {
       border-radius: 0;
